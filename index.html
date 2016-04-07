@@ -12,10 +12,21 @@
 <body class="container">
 <h1>D3 Examples</h1><hr />
 
-<div class="diagram"></div>
+<div class="col-md-4">
+    <select id="select" class="form-control" onchange="select()">
+        <option>All</option>
+        <option>Apple</option>
+        <option>Samsung</option>
+    </select>
+</div>
+<br /><br /><br />
+
+<div class="col-md-12">
+    <div class="diagram"></div>
+</div>
 
 <script type="text/javascript">
-    var phones = [ {name: 'iPhone 6', price: 64},
+    /*var phones = [ {name: 'iPhone 6', price: 64},
         {name: 'Samsung Galaxy S5', price: 48},
         {name: 'LG G4', price: 36},
         {name : 'MiPad 5', price: 25}];
@@ -33,7 +44,42 @@
             .text(function (d) {return d.name;});
 
     // Exit
-    d3.select('div.diagram').selectAll('div.item').data(phones).exit().remove();
+    d3.select('div.diagram').selectAll('div.item').data(phones).exit().remove();*/
+
+    var phones = [ {name: 'iPhone 6', price: 64, company: 'Apple'},
+        {name: 'Samsung Galaxy Tab 4', price: 28, company:'Samsung'},
+        {name: 'iPhone 5s', price: 49, company: 'Apple'},
+        {name: 'Samsung Galaxy S5', price: 48, company:'Samsung'},
+        {name: 'iPad Air', price: 37, company: 'Apple'},
+        {name: 'Samsung Galaxy Note', price: 36, company:'Samsung'}];
+
+    function showGraph(phones, company){
+
+        d3.select('div.diagram').selectAll('div.item').data(phones).enter().append('div')
+                .attr('class', 'item').append('span');
+
+        d3.select('div.diagram').selectAll('div.item').data(phones)
+                .attr("class", "item").style('width', function (d) { return (d.price * 6) + 'px';})
+                .select('span').text(function (d) { return d.name;});
+
+        d3.select('div.diagram').selectAll('div.item').data(phones).exit().remove();
+
+        d3.select("div.diagram").selectAll("div.item")
+                .filter(function (d, i) {
+                    if(company && company!=='All')
+                        return !(d.company == company);
+                    else
+                        return false;
+                })
+                .classed("unselected", true);
+    }
+
+    function select() {
+        var company = document.getElementById("select").value;
+        showGraph(phones, company);
+    }
+
+    showGraph(phones);
 </script>
 
 
