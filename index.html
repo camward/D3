@@ -3,29 +3,14 @@
 <head>
     <meta charset="utf-8">
     <title>D3 Examples</title>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-</head>
-<body>
 
-<style>
-    .item{
-        margin-bottom: 7px;
-        font-size: 15px;
-        margin-right: 2px;
-        min-height: 25px;
-        min-width: 20px;
-    }
-    .data {
-        background-color: steelblue;
-        text-align: right;
-        color: #f0f8ff;
-        display:inline-block;
-    }
-    .name{
-        display:inline-block;
-        margin-left:5px;
-    }
-</style>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <script src="js/lib/d3.v3.min.js"></script>
+</head>
+<body class="container">
+<h1>D3 Examples</h1><hr />
 
 <div class="diagram"></div>
 
@@ -50,5 +35,59 @@
     // Exit
     d3.select('div.diagram').selectAll('div.item').data(phones).exit().remove();
 </script>
+
+
+<script type="text/javascript">
+    var data = [3, 8, 21, 13, 1, 2, 5];
+    console.log('d3.max: ' + d3.max(data));
+    console.log('d3.min: ' + d3.min(data));
+    console.log('d3.extent: ' + d3.extent(data));
+    console.log('d3.sum: ' + d3.sum(data));
+    console.log('d3.median: ' + d3.median(data));
+    console.log('d3.mean: ' + d3.mean(data));
+    console.log('d3.quantile: ' + d3.quantile(data.sort(d3.ascending), 0.25));
+    console.log('d3.ascending: ' + data.sort(d3.ascending));
+    console.log('d3.descending: ' + data.sort(d3.descending));
+    console.log('d3.bisect: '+ d3.bisect(data.sort(d3.ascending), 11));
+    console.log('');
+
+
+    // группировка данных
+    var phones = [ {name: 'iPhone 6', price: 64, company: 'Apple'},
+        {name: 'Samsung Galaxy S5', price: 48, company:'Samsung'},
+        {name: 'iPhone 5s', price: 49, company: 'Apple'},
+        {name: 'Samsung Galaxy Note', price: 36, company:'Samsung'},
+        {name: 'iPad Air', price: 37, company: 'Apple'},
+        {name: 'Samsung Galaxy Tab 4', price: 28, company:'Samsung'}];
+
+    var nest = d3.nest().key(function (d) {
+        return d.company;
+    }).entries(phones);
+
+    //специальная функция для вывода объектов
+    function printArray(nest) {
+
+        nest.forEach(function (e) {
+            if (e.key)
+                console.log(e.key);
+            else
+                console.log(printObject(e));
+            if (e.values)
+                printArray(e.values);
+        });
+    }
+    function printObject(obj) {
+        var s = "{";
+        for (var f in obj) {
+            s += f + ": " + obj[f] + ", ";
+        }
+        s += "}";
+        return s;
+    }
+
+    printArray(nest);
+
+</script>
+
 </body>
 </html>
