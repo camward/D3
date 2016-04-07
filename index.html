@@ -3,149 +3,45 @@
 <head>
     <meta charset="utf-8">
     <title>D3 Examples</title>
-
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
-    <script src="js/lib/d3.v3.min.js"></script>
+    <script src="js/d3.v3.min.js"></script>
+    <script src="js/jquery-2.2.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 <body class="container">
 <h1>D3 Examples</h1><hr />
 
-<<div class="col-md-4">
-    <select id="select" class="form-control" onchange="select()">
-        <option>All</option>
-        <option>Apple</option>
-        <option>Samsung</option>
-    </select>
-</div>
-<div class="col-md-4">
-    <select id="selectSort" class="form-control" onchange="sort()">
-        <option selected disabled>Режим сортировки</option>
-        <option value="compareByCompany">По компании</option>
-        <option value="compareByPrice">По цене</option>
-        <option value="compareByName">По названию</option>
-    </select>
-</div>
-<br /><br /><br />
 
-<div class="col-md-12">
-    <div class="diagram"></div>
+<div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Работа с данными <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="pages/filter.html">Фильтрация</a></li>
+        <li><a href="pages/sorting.html">Сортировка</a></li>
+    </ul>
 </div>
 
-<script type="text/javascript">
-    /*var phones = [ {name: 'iPhone 6', price: 64},
-        {name: 'Samsung Galaxy S5', price: 48},
-        {name: 'LG G4', price: 36},
-        {name : 'MiPad 5', price: 25}];
+<div class="btn-group">
+    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">Графические элементы <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Действие</a></li>
+        <li><a href="#">Другое действие</a></li>
+        <li><a href="#">Что-то иное</a></li>
+    </ul>
+</div>
 
-    // Enter
-    d3.select('div.diagram').selectAll('div').data(phones).enter().append('div').attr('class', 'item')
-            .append('div').attr('class', 'data').append('span');
-
-    // Update
-    d3.select('div.diagram').selectAll('div.item').data(phones)
-            .select('div').style('width', function (d) { return (d.price * 3) + 'px';})
-            .select('span').text(function (d) { return d.price;});
-
-    d3.select('div.diagram').selectAll('div.item').data(phones).append('div').attr('class', 'name')
-            .text(function (d) {return d.name;});
-
-    // Exit
-    d3.select('div.diagram').selectAll('div.item').data(phones).exit().remove();*/
-
-
-    /*var phones = [ {name: 'iPhone 6', price: 64, company: 'Apple'},
-        {name: 'Samsung Galaxy Tab 4', price: 28, company:'Samsung'},
-        {name: 'iPhone 5s', price: 49, company: 'Apple'},
-        {name: 'Samsung Galaxy S5', price: 48, company:'Samsung'},
-        {name: 'iPad Air', price: 37, company: 'Apple'},
-        {name: 'Samsung Galaxy Note', price: 36, company:'Samsung'}];
-
-    function showGraph(phones, company){
-
-        d3.select('div.diagram').selectAll('div.item').data(phones).enter().append('div')
-                .attr('class', 'item').append('span');
-
-        d3.select('div.diagram').selectAll('div.item').data(phones)
-                .attr("class", "item").style('width', function (d) { return (d.price * 6) + 'px';})
-                .select('span').text(function (d) { return d.name;});
-
-        d3.select('div.diagram').selectAll('div.item').data(phones).exit().remove();
-
-        d3.select("div.diagram").selectAll("div.item")
-                .filter(function (d, i) {
-                    if(company && company!=='All')
-                        return !(d.company == company);
-                    else
-                        return false;
-                })
-                .classed("unselected", true);
-    }
-
-    function select() {
-        var company = document.getElementById("select").value;
-        showGraph(phones, company);
-    }
-
-    showGraph(phones);*/
-
-
-    var phones = [ {name: 'iPhone 6', price: 64, company: 'Apple'},
-        {name: 'Samsung Galaxy Tab 4', price: 28, company:'Samsung'},
-        {name: 'iPhone 5s', price: 49, company: 'Apple'},
-        {name: 'Samsung Galaxy S5', price: 48, company:'Samsung'},
-        {name: 'iPad Air', price: 37, company: 'Apple'},
-        {name: 'Samsung Galaxy Note', price: 36, company:'Samsung'}];
-
-    function showGraph(phones, comparator){
-
-        d3.select('div.diagram').selectAll('div.item').data(phones).enter().append('div')
-                .attr('class', 'item').append('span');
-
-        d3.select('div.diagram').selectAll('div.item').data(phones)
-                .attr("class", "item").style('width', function (d) { return (d.price * 6) + 'px';})
-                .select('span').text(function (d) { return d.name;});
-
-        d3.select('div.diagram').selectAll('div.item').data(phones).exit().remove();
-        if(comparator){
-            d3.select("div.diagram").selectAll("div.item").sort(comparator);
-        }
-    }
-
-    var compareByName = function (a, b) { // <-F
-        return a.name < b.name?-1:1;
-    };
-    var compareByPrice = function (a, b) { // <-G
-        return a.price < b.price?-1:1;
-    };
-    var compareByCompany = function (a, b) { // <-G
-        return a.company < b.company?-1:1;
-    };
-
-    function sort() {
-        var comparator = document.getElementById("selectSort").value;
-        switch(comparator){
-
-            case "compareByCompany" :
-                comparator= compareByCompany;
-                break;
-            case "compareByName" :
-                comparator= compareByName;
-                break;
-            case "compareByPrice" :
-                comparator= compareByPrice;
-                break;
-        }
-
-        showGraph(phones, comparator);
-    }
-
-    showGraph(phones);
-</script>
+<div class="btn-group">
+    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">Графики и диаграммы <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Действие</a></li>
+        <li><a href="#">Другое действие</a></li>
+        <li><a href="#">Что-то иное</a></li>
+    </ul>
+</div>
 
 
 <script type="text/javascript">
+    // методы для работы с данными
     var data = [3, 8, 21, 13, 1, 2, 5];
     console.log('d3.max: ' + d3.max(data));
     console.log('d3.min: ' + d3.min(data));
@@ -172,7 +68,7 @@
         return d.company;
     }).entries(phones);
 
-    //специальная функция для вывода объектов
+    // функция для вывода объектов
     function printArray(nest) {
 
         nest.forEach(function (e) {
@@ -184,6 +80,7 @@
                 printArray(e.values);
         });
     }
+
     function printObject(obj) {
         var s = "{";
         for (var f in obj) {
@@ -195,6 +92,37 @@
 
     printArray(nest);
 
+
+    // d3.scale.linear()
+    console.log('');
+    var data =[64, 62, 63, 59, 60, 57];
+    var linear = d3.scale.linear()
+            .domain([50, 70])
+            .range([1, 50]);
+
+    for(var i=0; i<data.length; i++){
+        console.log(linear(data[i]));
+    }
+
+
+    // d3.time.scale()
+    console.log('');
+    var start = new Date(2015, 0, 1), // 1 января 2015
+            end = new Date(2015, 2, 1), // 1 марта 2015
+            range = [0, 300]; // интервал значений по оси Х
+    var data = [ // интервал дат
+        new Date(2015, 0, 10),
+        new Date(2015, 0, 20),
+        new Date(2015, 0, 31),
+        new Date(2015, 1, 8),
+        new Date(2015, 1, 16)
+    ];
+
+    var time = d3.time.scale().domain([start, end]).rangeRound(range);
+    for(var i=0; i<data.length; i++){
+        data[i]=time(data[i]);
+        console.log(data);
+    }
 </script>
 
 </body>
