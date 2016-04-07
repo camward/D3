@@ -12,11 +12,19 @@
 <body class="container">
 <h1>D3 Examples</h1><hr />
 
-<div class="col-md-4">
+<<div class="col-md-4">
     <select id="select" class="form-control" onchange="select()">
         <option>All</option>
         <option>Apple</option>
         <option>Samsung</option>
+    </select>
+</div>
+<div class="col-md-4">
+    <select id="selectSort" class="form-control" onchange="sort()">
+        <option selected disabled>Режим сортировки</option>
+        <option value="compareByCompany">По компании</option>
+        <option value="compareByPrice">По цене</option>
+        <option value="compareByName">По названию</option>
     </select>
 </div>
 <br /><br /><br />
@@ -46,7 +54,8 @@
     // Exit
     d3.select('div.diagram').selectAll('div.item').data(phones).exit().remove();*/
 
-    var phones = [ {name: 'iPhone 6', price: 64, company: 'Apple'},
+
+    /*var phones = [ {name: 'iPhone 6', price: 64, company: 'Apple'},
         {name: 'Samsung Galaxy Tab 4', price: 28, company:'Samsung'},
         {name: 'iPhone 5s', price: 49, company: 'Apple'},
         {name: 'Samsung Galaxy S5', price: 48, company:'Samsung'},
@@ -77,6 +86,59 @@
     function select() {
         var company = document.getElementById("select").value;
         showGraph(phones, company);
+    }
+
+    showGraph(phones);*/
+
+
+    var phones = [ {name: 'iPhone 6', price: 64, company: 'Apple'},
+        {name: 'Samsung Galaxy Tab 4', price: 28, company:'Samsung'},
+        {name: 'iPhone 5s', price: 49, company: 'Apple'},
+        {name: 'Samsung Galaxy S5', price: 48, company:'Samsung'},
+        {name: 'iPad Air', price: 37, company: 'Apple'},
+        {name: 'Samsung Galaxy Note', price: 36, company:'Samsung'}];
+
+    function showGraph(phones, comparator){
+
+        d3.select('div.diagram').selectAll('div.item').data(phones).enter().append('div')
+                .attr('class', 'item').append('span');
+
+        d3.select('div.diagram').selectAll('div.item').data(phones)
+                .attr("class", "item").style('width', function (d) { return (d.price * 6) + 'px';})
+                .select('span').text(function (d) { return d.name;});
+
+        d3.select('div.diagram').selectAll('div.item').data(phones).exit().remove();
+        if(comparator){
+            d3.select("div.diagram").selectAll("div.item").sort(comparator);
+        }
+    }
+
+    var compareByName = function (a, b) { // <-F
+        return a.name < b.name?-1:1;
+    };
+    var compareByPrice = function (a, b) { // <-G
+        return a.price < b.price?-1:1;
+    };
+    var compareByCompany = function (a, b) { // <-G
+        return a.company < b.company?-1:1;
+    };
+
+    function sort() {
+        var comparator = document.getElementById("selectSort").value;
+        switch(comparator){
+
+            case "compareByCompany" :
+                comparator= compareByCompany;
+                break;
+            case "compareByName" :
+                comparator= compareByName;
+                break;
+            case "compareByPrice" :
+                comparator= compareByPrice;
+                break;
+        }
+
+        showGraph(phones, comparator);
     }
 
     showGraph(phones);
