@@ -38,3 +38,18 @@ svg path{
     fill: none;
     stroke-width: 2;
 }
+
+
+
+.axis path, .axis line {
+    fill: none;
+    stroke: steelblue;
+}
+.axis .grid-line {
+    stroke: #000;
+    shape-rendering: crispedges;
+    stroke-opacity: 0.2;
+}
+.axis text {
+    font: 10px Verdana;
+}
