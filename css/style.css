@@ -43,13 +43,16 @@ svg path{
 
 .axis path, .axis line {
     fill: none;
-    stroke: steelblue;
+    stroke: #333;
 }
 .axis .grid-line {
     stroke: #000;
-    shape-rendering: crispedges;
     stroke-opacity: 0.2;
 }
 .axis text {
     font: 10px Verdana;
+}
+.dot {
+    stroke: steelblue;
+    fill: lightblue;
 }
