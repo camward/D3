@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>D3 Examples</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <script src="../js/d3.v3.min.js"></script>
+</head>
+<body class="container">
+<h1>Графические элементы</h1><hr />
+
+<script type="text/javascript">
+    var width = 300, height = 300;
+    var svg = d3.select("body").append("svg");
+    svg.attr("height", height).attr("width", width);
+
+    // линия
+    svg.append("line")
+            .style("stroke", "green")
+            .style("stroke-width", "3")
+            .attr("x1", 20)
+            .attr("y1", 30)
+            .attr("x2", 300)
+            .attr("y2", 300);
+
+    // окружность
+    svg.append("circle")
+            .attr("cx", 100)
+            .attr("cy", 100)
+            .attr("r", 50);
+
+    // прямоугольник
+    svg.append("rect")
+            .style("fill", "none")
+            .style("stroke", "red")
+            .style("stroke-width", "2")
+            .attr("x", 30)
+            .attr("y", 20)
+            .attr("width", 100)
+            .attr("height", 100)
+            .attr("rx", 5);
+
+    // многоугольник
+    svg.append("polygon")
+            .style("fill", "none")
+            .style("stroke", "blue")
+            .style("stroke-width", "2")
+            .attr("points", "50,250 150,50 250,250");
+</script>
+</body>
+    <div class="col-md-12">
+        <br /><a href="../index.html" class="btn btn-info">На главную</a>
+    </div>
+</html>
