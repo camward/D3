@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>D3 Examples</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <script src="../js/d3.v3.min.js"></script>
+</head>
+<body class="container">
+<h1>Пути и группы объектов</h1><hr />
+
+<script type="text/javascript">
+    var width = 300, height = 300;
+
+    // массив точек для создания пути
+    var data = [
+        {x: 80, y: 50},{x: 110, y: 80},{x: 140, y: 90},
+        {x: 170, y: 70},{x: 200, y: 60},{x: 230, y: 60},
+        {x: 260, y: 70},{x: 290, y: 80},{x: 300, y: 70}
+    ];
+
+    // функция, создающая по массиву точек линии
+    var line = d3.svg.line()
+            .x(function(d){return d.x;})
+            .y(function(d){return d.y;});
+
+    var svg = d3.select("body").append("svg");
+
+    svg.attr("height", height).attr("width", width);
+
+    // добавляем путь
+    svg.append("path").attr("d", line(data));
+
+
+
+    // группы объектов
+    var g = svg.append("g");
+    // добавляем путь
+    g.append("circle")
+            .style("fill", "none")
+            .style("stroke", "steelblue")
+            .style("stroke-width", "2")
+            .attr("cx", 100)
+            .attr("cy", 150)
+            .attr("r", 30);
+
+    g.append("rect")
+            .style("fill", "none")
+            .style("stroke", "steelblue")
+            .style("stroke-width", "2")
+            .attr("x", 150)
+            .attr("y", 150)
+            .attr("width", 100)
+            .attr("height", 100)
+            .attr("rx", 5);
+</script>
+
+</body>
+    <div class="col-md-12">
+        <br /><a href="../index.html" class="btn btn-info">На главную</a>
+    </div>
+</html>
