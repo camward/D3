@@ -40,7 +40,7 @@ svg path{
 }
 
 
-
+.label {}
 .axis path, .axis line {
     fill: none;
     stroke: #333;
@@ -55,4 +55,8 @@ svg path{
 .dot {
     stroke: steelblue;
     fill: lightblue;
+}
+.bar {
+    stroke: none;
+    fill: #4682B4;
 }
