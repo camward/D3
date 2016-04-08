@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>D3 Examples</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <script src="../js/d3.v3.min.js"></script>
+</head>
+<body class="container">
+<h1>Трансформации и переходы</h1><hr />
+
+<script type="text/javascript">
+    var width = 300, height = 300;
+    var svg = d3.select("body").append("svg");
+    svg.attr("height", height).attr("width", width);
+
+    // оригинальный круг   
+    svg.append("circle")
+            .style("fill", "none")
+            .style("stroke", "steelblue")
+            .style("stroke-width", "2")
+            .attr("cx", 100)
+            .attr("cy", 100)
+            .attr("r", 50);
+
+    // круг с перемещением
+    svg.append("circle")
+            .style("fill", "none")
+            .style("stroke", "red")
+            .style("stroke-width", "2")
+            .attr("transform", "translate(50, 40)")
+            .attr("cx", 100)
+            .attr("cy", 100)
+            .attr("r", 50);
+
+
+    // оригинальный прямоугольник
+    /*svg.append("rect")
+            .style("fill", "none")
+            .style("stroke", "steelblue")
+            .style("stroke-width", "2")
+            .attr("x", 80)
+            .attr("y", 50)
+            .attr('width', 50)
+            .attr('height', 50);
+
+    // прямоугольник с увеличением в два раза
+    svg.append("rect")
+            .style("fill", "none")
+            .style("stroke", "red")
+            .style("stroke-width", "2")
+            .attr("transform", "scale(2)")
+            .attr("x", 80)
+            .attr("y", 50)
+            .attr('width', 50)
+            .attr('height', 50);*/
+
+
+    // оригинальный прямоугольник
+    /*svg.append("rect")
+            .style("fill", "none")
+            .style("stroke", "steelblue")
+            .style("stroke-width", "2")
+            .attr("x", 80)
+            .attr("y", 50)
+            .attr('width', 50)
+            .attr('height', 50);
+
+    // прямоугольник с поворотом на 45 градусов с центром (75, 75)
+    svg.append("rect")
+            .style("fill", "none")
+            .style("stroke", "red")
+            .style("stroke-width", "2")
+            .attr("transform", "rotate(45, 75, 75)")
+            .attr("x", 80)
+            .attr("y", 50)
+            .attr('width', 50)
+            .attr('height', 50);*/
+
+    /*svg.append("rect")
+            .style("fill", "none")
+            .style("stroke", "red")
+            .style("stroke-width", "2")
+            .attr("transform", "translate(0, -30),scale(1, 2),rotate(45, 105, 75)")
+            .attr("x", 80)
+            .attr("y", 50)
+            .attr('width', 50)
+            .attr('height', 50);*/
+
+
+
+    // переходы
+    svg.append("rect")
+            .style("fill", "black")
+            .style("stroke", "red")
+            .style("stroke-width", "2")
+            .attr("x", 80)
+            .attr("y", 50)
+            .attr('width', 50)
+            .attr('height', 50)
+            .transition()
+            .duration(5000)
+            .delay(200)
+            .style("fill", "#ffffff")
+            .style("stroke", "steelblue")
+            .attr('width', 200)
+            .attr('height', 180);
+</script>
+
+</body>
+    <div class="col-md-12">
+        <br /><a href="../index.html" class="btn btn-info">На главную</a>
+    </div>
+</html>
